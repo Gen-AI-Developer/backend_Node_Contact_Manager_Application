@@ -31,6 +31,7 @@ const updateContact = (request, responce) => {
 //@access public
 
 const createContact = (request, responce) => {
+    console.log("This is request:", request.body)
     responce.status(201).json({
         message: "Create contact"
     })
