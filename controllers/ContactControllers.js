@@ -31,7 +31,13 @@ const updateContact = (request, responce) => {
 //@access public
 
 const createContact = (request, responce) => {
-    console.log("This is request:", request.body)
+    console.log("This is request:", request.body);
+    const { name, email, phone } = request.body;
+    if (!name || !email || !phone) {
+        responce.status(400);
+        throw new Error('All fields are mandatory')
+    }
+
     responce.status(201).json({
         message: "Create contact"
     })
