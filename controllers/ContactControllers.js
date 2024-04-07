@@ -19,6 +19,10 @@ const getContacts = asyncHandler(
 const getContact = asyncHandler(
     async (request, responce) => {
         const contact = await Contacts.findById(request.params.id)
+        if (!contact){
+            responce.status(404);
+            throw new Error("Contact not Found")
+        }
         responce.status(200).json(contact)
     }
 );
@@ -28,6 +32,7 @@ const getContact = asyncHandler(
 
 const updateContact = asyncHandler(
     async (request, responce) => {
+        const contact = await Contacts
         responce.status(200).json({
             message: `this contact is updated @ ${request.params.id}`,
         })
