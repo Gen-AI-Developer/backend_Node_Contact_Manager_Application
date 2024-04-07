@@ -79,18 +79,32 @@ const createContact = asyncHandler(
 //         response.status(200).json(contact)
 //     }
 // );
-
-const deleteContact = asyncHandler(
-    async (request, response) => {
-        const contact = await Contacts.findById(request.params.id);
-        if (!contact) {
-            response.status(404);
-            throw new Error("Contact not found");
-        } else {
-            await Contacts.remove(); // Remove the specific contact
-            response.status(200).json({ message: "Contact removed successfully" });
-        }
+const deleteContact = asyncHandler(async (request, response) => {
+    const contact = await Contacts.findById(request.params.id)
+    if (!contact) {
+        response.status(404);
+        console.log(contact)
+        console.log(Contacts)
+        throw new Error("Contact not Found")
     }
+
+    await Contacts.remove();
+    response.status(200).json(Contacts, { message: "Contact removed successfully" });
+}
 );
+
+
+// const deleteContact = asyncHandler(
+//     async (request, response) => {
+//         const contact = await Contacts.findById(request.params.id);
+//         if (!contact) {
+//             response.status(404);
+//             throw new Error("Contact not found");
+//         } else {
+//             await Contacts.remove(); // Remove the specific contact
+//             response.status(200).json({ message: "Contact removed successfully" });
+//         }
+//     }
+// );
 
 module.exports = { getContacts, createContact, getContact, deleteContact, updateContact }
