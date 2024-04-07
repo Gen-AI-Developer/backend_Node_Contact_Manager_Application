@@ -32,10 +32,17 @@ const getContact = asyncHandler(
 
 const updateContact = asyncHandler(
     async (request, responce) => {
-        const contact = await Contacts
-        responce.status(200).json({
-            message: `this contact is updated @ ${request.params.id}`,
-        })
+        const contact = await Contacts.findById(request.params.id)
+        if (!contact) {
+            responce.status(404);
+            throw new Error("Contact not Found")
+        }
+        const updatedcontact = await Contacts.findByIdAndUpdate(
+            request.params.id,
+            request.body,
+            { new: true }
+        );
+        responce.status(200).json(updatedcontact)
     }
 );
 //@desc Create New Contacts
@@ -62,9 +69,14 @@ const createContact = asyncHandler(
 
 const deleteContact = asyncHandler(
     async (request, responce) => {
-        responce.status(200).json({
-            message: `this is contact is Deleted @ ${request.params.id}`,
-        })
+        const contact = await Contacts.findById(request.params.id)
+        if (!contact) {
+            responce.status(404);
+            throw new Error("Contact not Found")
+        }
+
+        await Contacts.remove();
+        responce.status(200).json(contact)
     }
 );
 module.exports = { getContacts, createContact, getContact, deleteContact, updateContact }
