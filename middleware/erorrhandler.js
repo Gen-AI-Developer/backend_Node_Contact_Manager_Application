@@ -19,7 +19,7 @@ const errorHandler = (err, request, response, next) => {
 
             break;
         default:
-            console.log('No Error - All Good. *_*')
+            console.log('No Error - All Good. *_*', statusCode)
             break;
     }
 
