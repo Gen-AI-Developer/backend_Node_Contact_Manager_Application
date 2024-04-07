@@ -46,10 +46,10 @@ const createContact = asyncHandler(
             responce.status(400);
             throw new Error('All fields are mandatory')
         }
-
-        responce.status(201).json({
-            message: "Create contact"
-        })
+const contact = await Contacts.create({
+    name,email,phone
+})
+        responce.status(201).json(contact)
     }
 );
 //@desc Delete  contact
