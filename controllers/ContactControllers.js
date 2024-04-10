@@ -88,7 +88,8 @@ const deleteContact = asyncHandler(async (request, response) => {
         throw new Error("Contact not Found")
     }
 
-    await contact.remove();
+    await contact.remove;
+    console.log(request.params.id)
     response.status(200).json(contact);
 }
 );
