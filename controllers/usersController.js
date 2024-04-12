@@ -11,4 +11,14 @@ const registerUser = asyncHandler(
     }
 );
 
-module.exports = { registerUser }
+//@desc Login a User
+//@route Post /api/user/login
+//@access public
+
+const loginUser = asyncHandler(
+    async (request, response) => {
+        response.json({ message: " Login for the User" });
+    }
+);
+
+module.exports = { registerUser, loginUser }
