@@ -9,3 +9,5 @@ router.post("/login", (request, response) => {
 router.post("/current", (request, response) => {
     response.json({ message: "Current User" })
 });
+
+module.exports = router;
