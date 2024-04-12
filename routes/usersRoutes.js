@@ -1,8 +1,8 @@
 const express = require("express")
+
 const router = express.Router();
-router.post("/register", (request, response) => {
-    response.json({ message: "Register the User" })
-});
+const { registerUser } = require("../controllers/usersController")
+router.post("/register", registerUser);
 router.post("/login", (request, response) => {
     response.json({ message: "Login the User" })
 });

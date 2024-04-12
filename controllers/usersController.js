@@ -1,10 +1,14 @@
+const asyncHandler = require("express-async-handler")
+
+
 //@desc Register a User
 //@route Post /api/user/register
 //@access public
 
-const regiesterUser = asyncHandler(
-    async (request, responce) => {
-        const user = await Contacts.find();
-        responce.status(200).json(contacts)
+const registerUser = asyncHandler(
+    async (request, response) => {
+        response.json({ message: "Register the User" });
     }
 );
+
+module.exports = { registerUser }
