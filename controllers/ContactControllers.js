@@ -63,10 +63,6 @@ const createContact = asyncHandler(
         responce.status(201).json(contact)
     }
 );
-//@desc Delete  contact
-//@route delete /api/contacts/:id
-//@access public
-
 // const deleteContact = asyncHandler(
 //     async (request, response) => {
 //         const contact = await Contacts.findById(request.params.id);
@@ -79,8 +75,13 @@ const createContact = asyncHandler(
 //         response.status(200).json(contact)
 //     }
 // );
+//@desc Delete  contact
+//@route delete /api/contacts/:id
+//@access public
 const deleteContact = asyncHandler(async (request, response) => {
-    const contact = await Contacts.findByIdAndDelete({ id: request.params.id })
+    console.log("Entering into Deleting Function")
+    const contact = await Contacts.deleteOne(request.params)
+    console.log(contact)
     if (!contact) {
         response.status(404);
         console.log(contact)
@@ -88,7 +89,7 @@ const deleteContact = asyncHandler(async (request, response) => {
         throw new Error("Contact not Found")
     }
 
-    await contact.remove();
+    //await contact.deleteOne(reques.params.id);
     console.log(request.params.id)
     response.status(200).json(contact);
 }
