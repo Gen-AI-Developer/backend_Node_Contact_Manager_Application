@@ -51,7 +51,7 @@ const updateContact = asyncHandler(
 
 const createContact = asyncHandler(
     async (request, responce) => {
-        console.log("This is request:", request.body);
+        //console.log("This is request:", request.body);
         const { name, email, phone } = request.body;
         if (!name || !email || !phone) {
             responce.status(400);
@@ -79,9 +79,9 @@ const createContact = asyncHandler(
 //@route delete /api/contacts/:id
 //@access public
 const deleteContact = asyncHandler(async (request, response) => {
-    console.log("Entering into Deleting Function")
+    // console.log("Entering into Deleting Function")
     const contact = await Contacts.deleteOne(request.params)
-    console.log(contact)
+    // console.log(contact)
     if (!contact) {
         response.status(404);
         console.log(contact)
@@ -90,7 +90,7 @@ const deleteContact = asyncHandler(async (request, response) => {
     }
 
     //await contact.deleteOne(reques.params.id);
-    console.log(request.params.id)
+    //console.log(request.params.id)
     response.status(200).json(contact);
 }
 );
