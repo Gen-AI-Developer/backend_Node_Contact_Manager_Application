@@ -1,4 +1,6 @@
-const asyncHandler = require("express-async-handler")
+const asyncHandler = require("express-async-handler");
+const User = require("../models/userModel");
+const bcrypt = require("bcrypt")
 
 
 //@desc Register a User
@@ -7,6 +9,16 @@ const asyncHandler = require("express-async-handler")
 
 const registerUser = asyncHandler(
     async (request, response) => {
+        const { username, email, password } = request.body;
+        if (!username || !email || !password) {
+            response.status(400);
+            throw new Error("All fields are mandatory!")
+        }
+        const userAvailable = await User.findOne({ email });
+        if (userAvailable) {
+            response.status(400);
+            throw new Error("User Already Registered!")
+        }
         response.json({ message: "Register the User" });
     }
 );
