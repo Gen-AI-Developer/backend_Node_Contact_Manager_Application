@@ -21,4 +21,13 @@ const loginUser = asyncHandler(
     }
 );
 
-module.exports = { registerUser, loginUser }
+//@desc Current User information
+//@route Get /api/user/current
+//@access public
+
+const currentUser = asyncHandler(
+    async (request, response) => {
+        response.json({ message: " current User information" });
+    }
+);
+module.exports = { registerUser, loginUser, currentUser }
