@@ -19,9 +19,6 @@ const registerUser = asyncHandler(
             response.status(400);
             throw new Error("User Already Registered!")
         }
-        //hashed password
-        const hashedpassword = await bcrypt.hash(password, 10);
-        console.log('HashedPassword:' + hashedpassword);
         response.json({ message: "Register the User" });
     }
 );
