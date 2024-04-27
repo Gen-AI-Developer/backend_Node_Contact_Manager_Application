@@ -29,7 +29,7 @@ const registerUser = asyncHandler(
 
 const loginUser = asyncHandler(
     async (request, response) => {
-        response.json({ "message": " Login for the User" });
+        response.json({ message: " Login for the User" });
     }
 );
 
