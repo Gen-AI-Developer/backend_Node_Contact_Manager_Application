@@ -19,6 +19,22 @@ const registerUser = asyncHandler(
             response.status(400);
             throw new Error("User Already Registered!")
         }
+        //hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+        //console.log("Hashed Password: ", hashedPassword)
+        const user = await User.create({
+            username,
+            email,
+            password: hashedPassword,
+        });
+        console.log(`User created ${user}`);
+        if (user) {
+            response.status(201).json({ _id: user.id, email: user.email })
+        }
+        else {
+            response.status(400);
+            throw new Error("User data is not validd")
+        }
         response.json({ message: "Register the User" });
     }
 );
